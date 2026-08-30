@@ -1,0 +1,31 @@
+--- home/sovol/plr.sh	2026-08-29 13:42:14.000000000 +0000
++++ DEMON/DEMON_SV08_MAX_REPLACEMENT_FILES/plr.sh	2026-08-29 14:20:38.601408200 +0000
+@@ -1,9 +1,11 @@
+ #!/bin/bash
+ mkdir -p ~/printer_data/gcodes/plr
+-filepath=$(sed -n "s/.*filepath *= *'\([^']*\)'.*/\1/p" /home/sovol/printer_data/config/saved_variables.cfg)
++# filepath=$(sed -n "s/.*filepath *= *'\([^']*\)'.*/\1/p" /home/sovol/printer_data/config/saved_variables.cfg)
++filepath=$(sed -n "s/.*filepath *= *'\([^']*\)'.*/\1/p" /home/sovol/demon_vars.cfg)
+ filepath=$(printf "$filepath")
+ echo "filepath=$filepath"
+-last_file=$(sed -n "s/.*last_file *= *'\([^']*\)'.*/\1/p" /home/sovol/printer_data/config/saved_variables.cfg)
++# last_file=$(sed -n "s/.*last_file *= *'\([^']*\)'.*/\1/p" /home/sovol/printer_data/config/saved_variables.cfg)
++last_file=$(sed -n "s/.*last_file *= *'\([^']*\)'.*/\1/p" /home/sovol/demon_vars.cfg)
+ last_file=$(printf "$last_file")
+ echo "$last_file"
+ plr=$last_file
+@@ -45,6 +47,7 @@
+ #echo 'G90' >> ${PLR_PATH}/"${plr}"
+ 
+ #升温防止扯模型
++echo 'Heating to resume your interrupted print'
+ echo 'M109 S160' >> ${PLR_PATH}/"${plr}"
+ # echo 'M190 S65' >> ${PLR_PATH}/"${plr}"
+ 
+@@ -104,3 +107,6 @@
+ 
+ #删除中间文件
+ rm /home/sovol/plrtmpA.$$
++
++echo 'Resuming your interrupted print....'
++

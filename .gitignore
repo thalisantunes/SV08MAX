@@ -1,0 +1,7 @@
+_work/
+
+# material de pesquisa local (fotos, videos) - trocar para versionar
+Referências/
+
+# pasta de apoio do handoff (mensagens de commit, bundle, script)
+DOCS/_commit/
